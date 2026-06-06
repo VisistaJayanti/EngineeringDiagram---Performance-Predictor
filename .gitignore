@@ -1,0 +1,18 @@
+# virtual environments
+myenv/
+venv/
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# model cache
+*.bin
+*.safetensors
+hf_cache/
+
+# environment files
+.env
+
+# jupyter
+.ipynb_checkpoints/
