@@ -1,0 +1,85 @@
+DRILLING
+Operation: Drilling creates cylindrical holes using a rotating cutting tool.
+Tolerance achievable: IT11 to IT12 without further operations.
+Surface finish achievable: Ra 6.3 to 12.5 micrometres.
+Standard cutting speed for steel: 20 to 30 m/min with HSS drill.
+Standard cutting speed for steel: 60 to 90 m/min with carbide drill.
+Feed rate: 0.1 to 0.3 mm/rev depending on diameter.
+Setup time: 5 minutes average for CNC machining centre.
+Machine required: CNC machining centre or drill press.
+
+REAMING
+Operation: Reaming improves hole accuracy and surface finish after drilling.
+Tolerance achievable: IT7 to IT9.
+Surface finish achievable: Ra 0.8 to 1.6 micrometres.
+Allowance before reaming: leave 0.2 to 0.5mm on diameter for reaming.
+Cutting speed: one third of drilling speed for same material.
+Setup time: 3 minutes additional after drilling setup.
+Machine required: same machine as drilling, CNC machining centre.
+
+BORING
+Operation: Boring enlarges and corrects existing holes to tight tolerances.
+Tolerance achievable: IT6 to IT8.
+Surface finish achievable: Ra 0.4 to 1.6 micrometres.
+Used when: hole requires better position accuracy than drilling provides.
+Used when: tolerance class IT7 or better is required.
+Setup time: 15 minutes for boring bar setup on CNC machining centre.
+Machine required: CNC machining centre with boring bar.
+
+FACE MILLING
+Operation: Face milling produces flat surfaces using a face mill cutter.
+Tolerance achievable: IT8 to IT10 for flatness.
+Surface finish achievable: Ra 0.8 to 3.2 micrometres.
+Cutting speed for steel: 100 to 200 m/min with carbide inserts.
+Feed per tooth: 0.1 to 0.3 mm per tooth.
+Setup time: 8 minutes average.
+Machine required: CNC machining centre.
+
+END MILLING / SLOT MILLING
+Operation: End milling produces slots, pockets, keyways, and contoured surfaces.
+Tolerance achievable: IT9 to IT11 for width.
+Surface finish achievable: Ra 1.6 to 3.2 micrometres.
+Cutting speed for steel: 80 to 150 m/min with carbide end mill.
+Setup time: 10 minutes average.
+Machine required: CNC machining centre.
+
+CNC TURNING
+Operation: Turning produces cylindrical, conical, and faced surfaces on a lathe.
+Tolerance achievable: IT6 to IT8 for diameter.
+Surface finish achievable: Ra 0.4 to 1.6 micrometres.
+Cutting speed for steel: 150 to 300 m/min with carbide insert.
+Feed rate: 0.1 to 0.3 mm/rev for finishing cuts.
+Setup time: 12 minutes average for CNC lathe.
+Machine required: CNC lathe.
+
+TAPPING
+Operation: Tapping cuts internal threads using a tap tool.
+Always preceded by drilling a tap drill hole.
+Tap drill diameter: nominal thread diameter minus pitch.
+Example M20x1.5: tap drill = 20 - 1.5 = 18.5mm diameter.
+Setup time: 5 minutes additional after drilling.
+Machine required: CNC machining centre with rigid tapping cycle.
+
+GRINDING
+Operation: Grinding achieves very tight tolerances and fine surface finishes.
+Tolerance achievable: IT5 to IT6.
+Surface finish achievable: Ra 0.1 to 0.4 micrometres.
+Used when: tolerance better than IT6 is required.
+Used when: surface finish Ra better than 0.4 micrometres required.
+Setup time: 20 minutes average.
+Machine required: cylindrical grinder or surface grinder.
+
+HONING
+Operation: Honing improves bore geometry and surface finish after boring or grinding.
+Tolerance achievable: IT5 to IT6 for bore diameter.
+Surface finish achievable: Ra 0.1 to 0.8 micrometres.
+Setup time: 15 minutes.
+Machine required: honing machine.
+
+CHAMFERING
+Operation: Chamfering removes sharp edges at hole entries and part edges.
+No tolerance class assigned — cosmetic and functional deburring.
+Surface finish: same as parent operation.
+Cycle time: 1 to 2 minutes per chamfer.
+Setup time: 3 minutes.
+Machine required: CNC machining centre with chamfer mill.

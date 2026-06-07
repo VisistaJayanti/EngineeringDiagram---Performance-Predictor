@@ -1,0 +1,26 @@
+MACHINERY HANDBOOK EXCERPTS
+
+DRILLING SPEEDS AND FEEDS
+For carbon steel HB 180-220:
+    HSS drill: cutting speed 20-25 m/min
+    Carbide drill: cutting speed 60-80 m/min
+    Feed per revolution: 0.1 to 0.3 mm depending on diameter
+    Smaller diameters use lower feed rates.
+
+REAMING ALLOWANCES
+Leave 0.2mm on diameter for reaming up to 20mm hole.
+Leave 0.3mm on diameter for reaming 20mm to 50mm hole.
+Reaming speed is one third of drilling speed.
+
+TAPPING
+Tap drill = nominal diameter minus pitch.
+M8 x 1.25: tap drill = 6.75mm
+M10 x 1.5: tap drill = 8.5mm
+M12 x 1.75: tap drill = 10.25mm
+M16 x 2.0: tap drill = 14.0mm
+M20 x 2.5: tap drill = 17.5mm
+
+BORING
+Single point boring achieves IT6 to IT8.
+Boring bar overhang should not exceed 4 times bar diameter.
+Finishing cuts: depth 0.1 to 0.3mm, feed 0.05 to 0.15mm/rev.

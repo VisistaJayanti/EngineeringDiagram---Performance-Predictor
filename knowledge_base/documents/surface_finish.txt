@@ -1,0 +1,42 @@
+SURFACE FINISH REQUIREMENTS AND PROCESSES
+
+Ra 0.1 micrometres
+Process: superfinishing, lapping
+Application: precision sealing surfaces, optical surfaces
+
+Ra 0.2 micrometres
+Process: cylindrical grinding, precision honing
+Application: hydraulic cylinder bores, precision bearing bores
+
+Ra 0.4 micrometres
+Process: fine grinding, precision boring
+Application: bearing seats, precision shafts
+
+Ra 0.8 micrometres
+Process: fine boring, reaming, precision turning
+Application: general precision fits, O-ring grooves
+
+Ra 1.6 micrometres
+Process: reaming, careful boring, fine turning
+Application: most precision engineering fits H7 and better
+This is the most common precision requirement in general engineering.
+
+Ra 3.2 micrometres
+Process: standard turning, milling, boring
+Application: general machined surfaces, non-sealing faces
+
+Ra 6.3 micrometres
+Process: rough turning, drilling, rough milling
+Application: non-critical surfaces, clearance faces
+
+Ra 12.5 micrometres
+Process: rough machining, coarse milling
+Application: non-functional surfaces
+
+THREAD SURFACE FINISH
+Metric threads M series: Ra 1.6 to 3.2 standard
+Fine threads: Ra 0.8 to 1.6 recommended
+
+O-RING GROOVE SURFACE FINISH
+Dynamic seals: Ra 0.4 to 0.8 micrometres
+Static seals: Ra 0.8 to 1.6 micrometres

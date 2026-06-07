@@ -98,6 +98,7 @@ class Qwen25VL(BaseVLM):
         try:
             cleaned = raw.strip()
 
+            # Strip markdown fences
             if cleaned.startswith("```"):
                 parts = cleaned.split("```")
                 if len(parts) >= 2:
@@ -106,18 +107,21 @@ class Qwen25VL(BaseVLM):
                         cleaned = cleaned[4:]
             cleaned = cleaned.strip()
 
+            # Try clean parse first
             try:
                 data = json.loads(cleaned)
-                return data.get(key, [])
-
-            except json.JSONDecodeError:
-                print(f"[Qwen2.5-VL] JSON truncated — attempting partial recovery")
-
-                array_start = cleaned.find('"' + key + '"')
-                if array_start == -1:
+                if isinstance(data, list):
+                    return data
+                elif isinstance(data, dict):
+                    return data.get(key, [])
+                else:
                     return []
 
-                bracket_start = cleaned.find("[", array_start)
+            except json.JSONDecodeError:
+                # JSON truncated — recover complete objects
+                print(f"[Qwen2.5-VL] JSON truncated — attempting partial recovery")
+
+                bracket_start = cleaned.find("[")
                 if bracket_start == -1:
                     return []
 

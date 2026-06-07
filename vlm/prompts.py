@@ -163,3 +163,60 @@ Return ONLY valid JSON:
         "it most likely describes. Use leader lines and proximity. JSON only."
     )
     return system, user
+
+
+def build_linking_prompt(features: list[dict], annotations: list[dict]) -> tuple[str, str]:
+    """
+    Build system + user prompts for spatial linking.
+    Called by spatial_aligner.py pass 2.
+    """
+    feature_lines = "\n".join([
+        f"  {f['feature_id']}: {f['feature_type']} "
+        f"at ({_safe_cx(f):.2f}, {_safe_cy(f):.2f})"
+        for f in features
+    ])
+
+    annotation_lines = "\n".join([
+        f"  {a['annotation_id']}: \"{a['raw_text']}\" "
+        f"at ({_safe_cx(a):.2f}, {_safe_cy(a):.2f})"
+        for a in annotations
+    ])
+
+    system = f"""
+You are an expert engineering drawing interpreter.
+
+GEOMETRIC FEATURES in this drawing:
+{feature_lines}
+
+TEXT ANNOTATIONS to link:
+{annotation_lines}
+
+For each annotation decide which feature it describes.
+Use leader lines, arrows, and proximity in the image.
+If an annotation has no clear feature (e.g. a general note), set linked_feature_id to null.
+
+Return ONLY this JSON:
+{{
+  "links": [
+    {{
+      "annotation_id": "<id>",
+      "linked_feature_id": "<feature id or null>",
+      "confidence": <float 0.0 to 1.0>
+    }}
+  ]
+}}
+"""
+    user = (
+        "Look at this engineering drawing. "
+        "Link each annotation to the feature it describes using leader lines. "
+        "Return JSON only."
+    )
+    return system, user
+
+
+def _safe_cx(obj: dict) -> float:
+    return float(obj.get("location", {}).get("cx", 0.5))
+
+
+def _safe_cy(obj: dict) -> float:
+    return float(obj.get("location", {}).get("cy", 0.5))

@@ -6,8 +6,7 @@ Loads both models once and routes tasks to the right one.
     InternVL2   → geometry / feature extraction
     Qwen2.5-VL  → annotation / text extraction
 
-Both models are cached after first load.
-Call get_geometry_model() and get_text_model() anywhere in the pipeline.
+Both models are cached after first load using lru_cache.
 """
 
 from functools import lru_cache

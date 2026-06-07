@@ -1,0 +1,56 @@
+ISO 286 TOLERANCE GRADES AND APPLICATIONS
+
+IT5
+Application: precision spindle bearings, gauge manufacture.
+Typical tolerance for 25mm diameter: 0.009mm.
+Achievable by: grinding, precision boring, honing.
+
+IT6
+Application: precision fits, rolling bearing seats, precision gears.
+Typical tolerance for 25mm diameter: 0.013mm.
+Achievable by: grinding, fine boring, precision reaming.
+Common fit designations: H6, g6, h6, k6, n6, p6.
+
+IT7
+Application: general precision engineering, most common precision grade.
+Typical tolerance for 25mm diameter: 0.021mm.
+Achievable by: reaming, boring, careful turning.
+Common fit designations: H7, f7, g6, h6, k6, n6, p6.
+H7 hole: standard clearance and transition fit hole tolerance.
+H7/g6: sliding fit — shafts that slide but do not rotate under load.
+H7/h6: close running fit — accurate location with small clearance.
+H7/k6: transition fit — accurate location, possible slight interference.
+H7/n6: transition fit — more interference, light press fit.
+H7/p6: interference fit — light press fit for permanent assembly.
+
+IT8
+Application: general engineering, non-precision fits.
+Typical tolerance for 25mm diameter: 0.033mm.
+Achievable by: careful drilling, standard reaming, turning.
+Common fit designations: H8, f8, e8.
+H8/f8: easy running fit — for shafts running in plain bearings.
+
+IT9
+Application: general workshop practice.
+Typical tolerance for 25mm diameter: 0.052mm.
+Achievable by: standard drilling, turning.
+
+IT10
+Application: rough machining, where fit accuracy is not critical.
+Achievable by: standard milling, drilling.
+
+IT11
+Application: very rough work, cast surfaces, flame cut edges.
+Achievable by: drilling without reaming, rough milling.
+
+IT12
+Application: raw stock tolerances, sheet metal stamping.
+
+SURFACE FINISH AND MANUFACTURING PROCESS RELATIONSHIP
+Ra 0.1 to 0.2: lapping, superfinishing
+Ra 0.2 to 0.4: cylindrical grinding, honing
+Ra 0.4 to 0.8: fine grinding, precision boring
+Ra 0.8 to 1.6: reaming, fine turning, fine boring
+Ra 1.6 to 3.2: turning, milling, boring, drilling with reaming
+Ra 3.2 to 6.3: standard turning, milling, drilling
+Ra 6.3 to 12.5: rough turning, rough milling, drilling
