@@ -1,3 +1,6 @@
+
+
+
 # EngineeringDiagram---Performance-Predictor
 A pre-trained VLM model architecture aimed at identifying the optimal number of man hours, precision, machines required, dimensions of an X product mentioned by studying and analyzing the Engineering CAD diagrams provided. 
 
@@ -33,4 +36,10 @@ Future work:
 Have to check the evaluation metrices 
 Have to make the UI for the intiial upload 
 Used dummy data as of now, need to check the confidentiality check 
+
+Current Issues:
+1) InternVL2 is overfitting and memorizing on the grid pattern when generating the feature list and not giving the geometry correctly
+2) InternVL2 cannot be finetuned because we lack training data, I will look through if i find any dataste from huggingface or kaggle
+3) Best case would be shifting from InternVL2 to InternVL-2.5-8B or InternVL-26B or using Qwen2.5VL only for both annotations and feature list
+4) After this, going to implement LLM as judge with Gemini 
 
