@@ -224,6 +224,19 @@ def classify_all(
         ops = _classify_one(feat, op_counter, vlm_caller, flags)
         all_operations.extend(ops)
     
+    # ── Remove invalid operations from LLM responses ──────────────────────────
+    before_count  = len(all_operations)
+    all_operations = [
+        op for op in all_operations
+        if op.setup_time_min  >= 0
+        and op.cycle_time_min >= 0
+        and op.operation_type.lower().strip() not in ("none", "unknown", "")
+        and op.machine_type.strip() != ""
+    ]
+    removed = before_count - len(all_operations)
+    if removed > 0:
+        print(f"[Classifier] Removed {removed} invalid operations")
+    
     total_setup = sum(op.setup_time_min for op in all_operations)
     total_cycle = sum(op.cycle_time_min for op in all_operations)
     total_hours = (total_setup + total_cycle) / 60.0
@@ -301,7 +314,11 @@ def _rule_to_op(
     """Convert a matched rule into a MachiningOperation."""
     op_counter[0] += 1
 
-    nom   = feat.dimensions[0].nominal_mm if feat.dimensions else None
+    nom = None 
+    for dim in feat.dimensions:
+        if dim.nominal_mm and dim.nominal_mm > 0.5:
+            nom = dim.nominal_mm
+            break
     nom_s = f"{nom:.1f}" if nom else "?"
     und_s = f"{(nom - 0.2):.1f}" if nom else "?"
     tap_s = f"{(nom - 1.5):.1f}" if nom else "?"
@@ -327,6 +344,41 @@ def _rule_to_op(
         confidence     = 1.0,
     )
 
+def _normalize_machine_name(name: str) -> str:
+    """
+    Standardize machine names from LLM free-form responses
+    into consistent names used throughout the report.
+
+    Why needed:
+        LLM returns strings like 'CNC machinning centre' (typo),
+        'same CNC machining center used for drilling', or
+        'CNC machining centre ord drill press'.
+        These all mean the same machine but break deduplication.
+    """
+    if not name:
+        return "CNC machining centre"
+
+    name_lower = name.lower()
+
+    if "lathe" in name_lower:
+        return "CNC lathe"
+    elif "grind" in name_lower:
+        return "CNC grinder"
+    elif "hon" in name_lower:
+        return "honing machine"
+    elif "edm" in name_lower:
+        return "EDM machine"
+    elif "lathe" in name_lower or "turn" in name_lower:
+        return "CNC lathe"
+    elif "drill" in name_lower and "centre" not in name_lower and "center" not in name_lower:
+        return "CNC machining centre"
+    elif any(x in name_lower for x in ["mill", "machining", "centre", "center", "cnc"]):
+        return "CNC machining centre"
+    else:
+        return "CNC machining centre"
+
+
+
 def _llm_classify(
     feat       : GroundedFeature,
     it_grade   : str,
@@ -337,7 +389,7 @@ def _llm_classify(
     """Use LLM + RAG for features not covered by the rule table."""
     retriever   = get_retriever()
     nom         = feat.dimensions[0].nominal_mm if feat.dimensions else None
-    rag_context = retriever.retrieve_for_feature(
+    rag_context = retriever.retrieve_features(
         feature_type = feat.feature_type,
         iso_grade    = it_grade,
         nominal_mm   = nom,
@@ -357,8 +409,8 @@ Return ONLY this JSON structure:
       "operation_type": "<drilling|boring|milling|turning|reaming|grinding|tapping>",
       "machine_type"  : "<specific machine>",
       "tooling"       : ["<tool 1>", "<tool 2>"],
-      "precision_class": "<IT grade>",
-      "surface_finish" : "<Ra range>",
+      "precision_class": "<single IT grade only e.g. IT7 or IT11, no other text>",
+      "surface_finish" : "<Ra value range only e.g. Ra 0.8-1.6 µm, no other text>",
       "setup_time_min" : <float>,
       "cycle_time_min" : <float>,
       "operator_skill" : "<skill level>",
@@ -392,7 +444,7 @@ Determine the required machining operations. Return JSON only.
                 operation_id   = f"op_{op_counter[0]:03d}",
                 feature_id     = feat.feature_id,
                 operation_type = op_data.get("operation_type", "unknown"),
-                machine_type   = op_data.get("machine_type", "unknown"),
+                machine_type   = _normalize_machine_name(op_data.get("machine_type", "")),
                 tooling        = op_data.get("tooling", []),
                 precision_class= op_data.get("precision_class", it_grade),
                 surface_finish = op_data.get("surface_finish", "unknown"),

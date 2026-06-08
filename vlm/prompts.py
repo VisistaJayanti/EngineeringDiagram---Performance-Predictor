@@ -20,33 +20,42 @@ Rules for every prompt:
 
 GEOMETRY_SYSTEM = """
 You are an expert mechanical engineer reading an engineering CAD drawing.
-Your job is to identify every geometric feature visible in this drawing tile.
+Your task is to identify geometric features that are ACTUALLY VISIBLE in this image.
 
-FEATURE TYPES you must recognize:
-  hole, through_hole, blind_hole, counterbore, countersink,
-  thread, slot, keyway, groove, fillet, chamfer, boss, pocket,
-  flat_face, cylindrical_face, stepped_face, rib, undercut
+CRITICAL RULES:
+- Only report features you can directly see in this specific image
+- Do NOT generate example features or template responses
+- Do NOT list one of every feature type you know
+- Do NOT place features at evenly spaced grid coordinates like 0.1, 0.2, 0.3
+- If the drawing shows only holes, return only holes
+- If you see 3 holes return 3 entries, not 17
+- Every feature must have a unique location based on where it actually appears
+- Coordinates must reflect actual pixel positions in this image, not a pattern
 
-OUTPUT RULES:
-  - Return ONLY valid JSON, no explanation, no markdown, no code fences
-  - If you cannot identify a feature clearly, use type "unknown"
-  - Do NOT invent features not visible in the image
-  - Location is a fraction of image size from top-left (0.0 to 1.0)
+WHAT TO LOOK FOR:
+- Circular shapes with center marks are holes
+- Lines indicating cuts or recesses are slots or grooves
+- Chamfered or filleted edges
+- Threads shown as dashed circles
+- Section lines and cross-hatching indicating material cuts
 
-RETURN THIS EXACT JSON STRUCTURE:
+OUTPUT FORMAT — return ONLY valid JSON, no markdown, no explanation:
 {
   "features": [
     {
       "feature_id": "f1",
-      "feature_type": "<type from list above>",
-      "description": "<max 10 words describing what you see>",
+      "feature_type": "<what you actually see: hole|slot|thread|chamfer|fillet|boss|pocket|groove|face|unknown>",
+      "description": "<describe what you see in max 8 words>",
       "location": {
-        "cx": <float 0.0 to 1.0>,
-        "cy": <float 0.0 to 1.0>
+        "cx": <actual x position as fraction 0.0 to 1.0>,
+        "cy": <actual y position as fraction 0.0 to 1.0>
       }
     }
   ]
 }
+
+If you cannot identify any clear features return:
+{"features": []}
 """
 
 GEOMETRY_USER = (
@@ -80,8 +89,10 @@ OUTPUT RULES:
   - If you cannot clearly read text, write raw_text as ILLEGIBLE
   - Do NOT invent dimension values you cannot clearly see
   - Return ONLY valid JSON, no explanation, no markdown, no code fences
-  - Location is fraction of image size from top-left (0.0 to 1.0)
-
+  "location values MUST be between 0.0 and 1.0 as fractions of image width and height. "
+"Example: a feature at pixel (512, 256) in a 1024x1024 image returns cx: 0.5, cy: 0.25. "
+"NEVER return pixel coordinates. Always return fractions between 0.0 and 1.0."
+  
 RETURN THIS EXACT JSON STRUCTURE:
 {
   "annotations": [

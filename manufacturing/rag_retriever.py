@@ -36,7 +36,7 @@ class RagRetriever:
         self._model = SentenceTransformer(EMBED_MODEL)
         self._index = faiss.read_index(str(INDEX_FILE))
 
-        with open(CHUNKS_File, "rb") as f:
+        with open(CHUNKS_FILE, "rb") as f:
             self._chunks = pickle.load(f)
 
         print(f"[RAG] Loaded {self._index.ntotal} chunks")

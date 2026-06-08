@@ -17,16 +17,45 @@ with open(os.path.join(TEST_DIR, "png2pdf.pdf"), "rb") as f:
 
 pages     = process_upload(file_bytes, "png2pdf.pdf")
 processed = prepare_image(pages[0])
-tile      = processed["tiles"][0]
 
-print("Stage 1 — Running VLMs...")
-features    = run_geometry_extraction(tile.image_b64)
-annotations = run_annotation_extraction(tile.image_b64)
+all_features = []
+all_annotations = []
+
+print(f"Processing {len(processed['tiles'])} tiles...")
+for i, tile in enumerate(processed["tiles"]):
+    print(f" Tile {i+1}/{len(processed['tiles'])}: {tile.tile_id}")
+    tile_features = run_geometry_extraction(tile.image_b64)
+    tile_annotations = run_annotation_extraction(tile.image_b64)
+
+    for f in tile_features:
+        f["feature_id"] = f"{tile.tile_id}_{f['feature_id']}"
+    for a in tile_annotations:
+        a["annotation_id"] = f"{tile.tile_id}_{a['annotation_id']}"
+    
+    all_features.extend(tile_features)
+    all_annotations.extend(tile_annotations)
+
+print(f"Total features: {len(all_features)}")
+print(f"Total annotations: {len(all_annotations)}")
+
+tile = processed["tiles"][0]
+features = all_features
+annotations = all_annotations
 
 print("Stage 2 — Aligning annotations...")
 text_model  = get_text_model()
 
 def vlm_caller(system_prompt, user_prompt, image_b64):
+    # Manufacturing inference calls pass empty image_b64
+    # In that case use a text-only call via analyze with a blank image
+    if not image_b64:
+        # create a tiny blank white image for text-only calls
+        from PIL import Image
+        import io, base64
+        blank = Image.new("RGB", (32, 32), color=(255, 255, 255))
+        buf   = io.BytesIO()
+        blank.save(buf, format="PNG")
+        image_b64 = base64.b64encode(buf.getvalue()).decode("utf-8")
     return text_model.analyze(image_b64, system_prompt, user_prompt)
 
 linked      = align(features, annotations, tile.image_b64, vlm_caller)

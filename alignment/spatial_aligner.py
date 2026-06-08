@@ -114,16 +114,18 @@ def _proximity_pass(
     unlinked = []
 
     for ann in annotations:
-        ann_cx = _get_cx(ann)
-        ann_cy = _get_cy(ann)
+
+        #Adding normalization, calling the function 
+        ann_cx = _normalize(_get_cx(ann))
+        ann_cy = _normalize(_get_cy(ann))
 
         best_feature_id = None
         best_distance   = float("inf")
 
         # Find the closest feature
         for feat in features:
-            feat_cx = _get_cx(feat)
-            feat_cy = _get_cy(feat)
+            feat_cx = _normalize(_get_cx(feat))
+            feat_cy = _normalize(_get_cy(feat))
 
             dist = _euclidean(ann_cx, ann_cy, feat_cx, feat_cy)
 
@@ -269,6 +271,11 @@ def _get_cy(obj: dict) -> float:
     loc = obj.get("location", {})
     return float(loc.get("cy", 0.5))
 
+#ADDING NORMALIZATION TO ENSURE THAT DIMENSIONS MAKE SENSE FOR ALL THE FEATURES 
+def _normalize(value: float, tile_size: int = 1024) -> float:
+    if value > 1.0:
+        return value / tile_size
+    return value 
 
 def _print_summary(annotations: list[dict]) -> None:
     """Print a clean summary of linking results."""
