@@ -1,26 +1,4 @@
-"""
-manufacturing/time_estimator.py
---------------------------------
-Refines time estimates using machining formulas.
 
-The process_classifier gives base time estimates from the rule table.
-This module applies actual cutting speed and feed rate formulas
-to produce more accurate cycle time estimates when nominal
-dimension data is available.
-
-Formulas used:
-    Drilling:
-        RPM = (Vc × 1000) / (π × D)
-        cycle_time = (depth / (feed × RPM)) minutes
-
-    Turning:
-        RPM = (Vc × 1000) / (π × D)
-        cycle_time = (length / (feed × RPM)) minutes
-
-    Milling:
-        RPM = (Vc × 1000) / (π × D_tool)
-        cycle_time = (length / (fz × z × RPM)) minutes
-"""
 
 import math
 from manufacturing.process_classifier import MachiningOperation
@@ -28,8 +6,7 @@ from alignment.symbol_parser import GroundedFeature
 from typing import Optional
 
 
-# ── Cutting data for steel (medium carbon, HB 200) ────────────────────────────
-# Vc = cutting speed in m/min, f = feed in mm/rev or mm/tooth
+
 CUTTING_DATA = {
     "drilling" : {"Vc": 25.0,  "f": 0.15},   # HSS drill, steel
     "reaming"  : {"Vc": 8.0,   "f": 0.20},   # HSS reamer

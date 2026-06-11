@@ -224,7 +224,7 @@ def classify_all(
         ops = _classify_one(feat, op_counter, vlm_caller, flags)
         all_operations.extend(ops)
     
-    # ── Remove invalid operations from LLM responses ──────────────────────────
+    
     before_count  = len(all_operations)
     all_operations = [
         op for op in all_operations
@@ -316,9 +316,10 @@ def _rule_to_op(
 
     nom = None 
     for dim in feat.dimensions:
-        if dim.nominal_mm and dim.nominal_mm > 0.5:
+        if (dim.nominal_mm and dim.nominal_mm > 0.5 and dim.dim_type in ("diameter", "linear")):
             nom = dim.nominal_mm
-            break
+            break 
+        
     nom_s = f"{nom:.1f}" if nom else "?"
     und_s = f"{(nom - 0.2):.1f}" if nom else "?"
     tap_s = f"{(nom - 1.5):.1f}" if nom else "?"
@@ -465,9 +466,7 @@ Determine the required machining operations. Return JSON only.
         return []
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-# REPORT PRINTER
-# ─────────────────────────────────────────────────────────────────────────────
+#PRINTING THE MANUFACTURING REPORT 
 
 def _print_report(report: ManufacturingReport) -> None:
     print(f"\n{'='*60}")

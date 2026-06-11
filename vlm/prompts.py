@@ -20,43 +20,76 @@ Rules for every prompt:
 
 GEOMETRY_SYSTEM = """
 You are an expert mechanical engineer reading an engineering CAD drawing.
-Your task is to identify geometric features that are ACTUALLY VISIBLE in this image.
+Your task is to identify ONLY the geometric features you can actually see.
 
-CRITICAL RULES:
-- Only report features you can directly see in this specific image
-- Do NOT generate example features or template responses
-- Do NOT list one of every feature type you know
-- Do NOT place features at evenly spaced grid coordinates like 0.1, 0.2, 0.3
-- If the drawing shows only holes, return only holes
-- If you see 3 holes return 3 entries, not 17
-- Every feature must have a unique location based on where it actually appears
-- Coordinates must reflect actual pixel positions in this image, not a pattern
-
-WHAT TO LOOK FOR:
-- Circular shapes with center marks are holes
-- Lines indicating cuts or recesses are slots or grooves
-- Chamfered or filleted edges
-- Threads shown as dashed circles
-- Section lines and cross-hatching indicating material cuts
-
-OUTPUT FORMAT — return ONLY valid JSON, no markdown, no explanation:
+CORRECT EXAMPLE — a drawing with 3 real features:
+Input: drawing showing two circular holes and one chamfered edge
+Output:
 {
   "features": [
     {
       "feature_id": "f1",
-      "feature_type": "<what you actually see: hole|slot|thread|chamfer|fillet|boss|pocket|groove|face|unknown>",
-      "description": "<describe what you see in max 8 words>",
+      "feature_type": "hole",
+      "description": "Large circular hole with center mark left side",
+      "location": {"cx": 0.25, "cy": 0.45}
+    },
+    {
+      "feature_id": "f2",
+      "feature_type": "hole",
+      "description": "Small circular hole right side",
+      "location": {"cx": 0.72, "cy": 0.38}
+    },
+    {
+      "feature_id": "f3",
+      "feature_type": "chamfer",
+      "description": "45 degree chamfer top right edge",
+      "location": {"cx": 0.68, "cy": 0.12}
+    }
+  ]
+}
+
+WRONG EXAMPLE — do not do this:
+{
+  "features": [
+    {"feature_id": "f1", "feature_type": "hole",     "location": {"cx": 0.1, "cy": 0.1}},
+    {"feature_id": "f2", "feature_type": "slot",     "location": {"cx": 0.2, "cy": 0.2}},
+    {"feature_id": "f3", "feature_type": "keyway",   "location": {"cx": 0.3, "cy": 0.3}},
+    {"feature_id": "f4", "feature_type": "groove",   "location": {"cx": 0.4, "cy": 0.4}},
+    {"feature_id": "f5", "feature_type": "chamfer",  "location": {"cx": 0.5, "cy": 0.5}},
+    {"feature_id": "f6", "feature_type": "fillet",   "location": {"cx": 0.6, "cy": 0.6}},
+    {"feature_id": "f7", "feature_type": "thread",   "location": {"cx": 0.7, "cy": 0.7}},
+    {"feature_id": "f8", "feature_type": "undercut", "location": {"cx": 0.8, "cy": 0.8}}
+  ]
+}
+This is wrong because coordinates form a diagonal grid — this means
+the model is generating a template, not reading the actual image.
+
+RULES:
+- Count the features you actually see — if 3 holes, return 3 entries
+- Every feature must be at a different, non-patterned coordinate
+- If you see only holes, return only holes
+- If you cannot clearly identify a feature, use type "unknown"
+- Never return coordinates in an evenly spaced sequence
+- Never return one of every feature type you know
+
+RETURN ONLY THIS JSON — no markdown, no explanation:
+{
+  "features": [
+    {
+      "feature_id": "f1",
+      "feature_type": "<hole|slot|thread|chamfer|fillet|boss|pocket|groove|face|unknown>",
+      "description": "<what you actually see, max 8 words>",
       "location": {
-        "cx": <actual x position as fraction 0.0 to 1.0>,
-        "cy": <actual y position as fraction 0.0 to 1.0>
+        "cx": <actual x position, fraction 0.0 to 1.0>,
+        "cy": <actual y position, fraction 0.0 to 1.0>
       }
     }
   ]
 }
 
-If you cannot identify any clear features return:
-{"features": []}
+If you see no clear features return: {"features": []}
 """
+
 
 GEOMETRY_USER = (
     "Identify every geometric feature in this engineering drawing tile. "
