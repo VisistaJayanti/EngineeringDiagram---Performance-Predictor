@@ -41,5 +41,12 @@ Current Issues:
 1) InternVL2 is overfitting and memorizing on the grid pattern when generating the feature list and not giving the geometry correctly
 2) InternVL2 cannot be finetuned because we lack training data, I will look through if i find any dataste from huggingface or kaggle
 3) Best case would be shifting from InternVL2 to InternVL-2.5-8B or InternVL-26B or using Qwen2.5VL only for both annotations and feature list
-4) After this, going to implement LLM as judge with Gemini 
+4) After this, going to implement LLM as judge with Gemini
+
+Current Progress:
+1) Have changed the model from InternVL2 to Kimi-k2.6 with purchased API key from openrouter
+2) Have used two VLA models Qwen 2.5 VL and Kimi-k2.6 and did the initial evaluation
+3) Haved setup LLM evaluation using GPT and Gemini
+4) Generates detailed manufacturing report on number of human hours required and the machine required
+5) The results of LLM evaluation is saved to JSON file
 
