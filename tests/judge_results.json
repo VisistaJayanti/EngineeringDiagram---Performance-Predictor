@@ -1,0 +1,96 @@
+{
+  "your_pipeline": {
+    "features": [],
+    "annotations": [
+      {
+        "raw_text": "\u03a660",
+        "annotation_type": "diameter_dimension"
+      },
+      {
+        "raw_text": "R1",
+        "annotation_type": "radius_dimension"
+      },
+      {
+        "raw_text": "fx45\u00b0",
+        "annotation_type": "angular_dimension"
+      },
+      {
+        "raw_text": "21.5",
+        "annotation_type": "linear_dimension"
+      },
+      {
+        "raw_text": "21.5",
+        "annotation_type": "linear_dimension"
+      },
+      {
+        "raw_text": "A-A(1:1)",
+        "annotation_type": "general_note"
+      },
+      {
+        "raw_text": "0.02D",
+        "annotation_type": "linear_dimension"
+      },
+      {
+        "raw_text": "R1",
+        "annotation_type": "radius_dimension"
+      },
+      {
+        "raw_text": "A",
+        "annotation_type": "general_note"
+      },
+      {
+        "raw_text": "C(4 : 1)",
+        "annotation_type": "gdt_callout"
+      },
+      {
+        "raw_text": "+E 0.4 x 0.2 DIN 509",
+        "annotation_type": "thread_callout"
+      },
+      {
+        "raw_text": "General tolerance DIN ISO 2768 -medium",
+        "annotation_type": "general_note"
+      },
+      {
+        "raw_text": "Deburr and break sharp edges 0.1...0.3mm",
+        "annotation_type": "general_note"
+      },
+      {
+        "raw_text": "(1)",
+        "annotation_type": "general_note"
+      },
+      {
+        "raw_text": "N 509",
+        "annotation_type": "title_block_field"
+      },
+      {
+        "raw_text": "General tolerance DIN ISO 2768 -medium Deburr and break sharp edges 0..1...0,3mm Scratches and dents are not acceptable Date Initia/e",
+        "annotation_type": "general_note"
+      },
+      {
+        "raw_text": "Date Initia/e",
+        "annotation_type": "title_block_field"
+      },
+      {
+        "raw_text": "-medium\n0..1...0,3mm.\nacceptable.",
+        "annotation_type": "general_note"
+      },
+      {
+        "raw_text": "3\u221a(\u221a)",
+        "annotation_type": "diameter_dimension"
+      },
+      {
+        "raw_text": "Gewicht Format",
+        "annotation_type": "title_block_field"
+      },
+      {
+        "raw_text": "A3",
+        "annotation_type": "title_block_field"
+      }
+    ],
+    "manufacturing": [],
+    "total_human_hours": 0.0
+  },
+  "gpt4o": {},
+  "gemini": {},
+  "evaluation": {}
+}

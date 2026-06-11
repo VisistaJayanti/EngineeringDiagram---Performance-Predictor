@@ -10,8 +10,8 @@ import io
 from io import BytesIO 
 import os 
 import json 
-from opnai import OpenAI 
-import google.generartiveai as genai 
+from openai import OpenAI 
+from google import genai
 from PIL import Image 
 from dotenv import load_dotenv 
 import base64

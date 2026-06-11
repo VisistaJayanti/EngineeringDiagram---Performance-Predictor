@@ -20,7 +20,7 @@ from alignment.spatial_aligner import align
 from alignment.symbol_parser import parse_all
 from manufacturing.process_classifier import classify_all
 from manufacturing.time_estimator import refine_times
-from llm_judge.gpt4o_analyzer import analyze_with_gpt4o
+from llm_judge.gpt4o_analyzer import _analyze_with_gpt
 from llm_judge.gemini_analyzer import analyze_with_gemini
 from llm_judge.judge import run_judge
 
@@ -126,7 +126,7 @@ def main():
     print("\n" + "="*60)
     print("Step 2 — Running GPT-4o...")
     print("="*60)
-    output_gpt4o = analyze_with_gpt4o(full_image_b64)
+    output_gpt4o = _analyze_with_gpt(full_image_b64)
 
     print("\n" + "="*60)
     print("Step 3 — Running Gemini...")
