@@ -1,6 +1,27 @@
 {
   "your_pipeline": {
-    "features": [],
+    "features": [
+      {
+        "feature_type": "hole",
+        "description": "Top bolt hole on vertical centerline"
+      },
+      {
+        "feature_type": "hole",
+        "description": "Right bolt hole on horizontal centerline"
+      },
+      {
+        "feature_type": "hole",
+        "description": "Bottom bolt hole on vertical centerline"
+      },
+      {
+        "feature_type": "hole",
+        "description": "Central bore with concentric circles"
+      },
+      {
+        "feature_type": "chamfer",
+        "description": "Fifteen degree chamfer detail lower left"
+      }
+    ],
     "annotations": [
       {
         "raw_text": "\u03a660",
@@ -63,6 +84,22 @@
         "annotation_type": "title_block_field"
       },
       {
+        "raw_text": "38",
+        "annotation_type": "linear_dimension"
+      },
+      {
+        "raw_text": "30",
+        "annotation_type": "linear_dimension"
+      },
+      {
+        "raw_text": "0.5\u00d745\u00b0",
+        "annotation_type": "angular_dimension"
+      },
+      {
+        "raw_text": "0.5\u00d745\u00b0",
+        "annotation_type": "angular_dimension"
+      },
+      {
         "raw_text": "General tolerance DIN ISO 2768 -medium Deburr and break sharp edges 0..1...0,3mm Scratches and dents are not acceptable Date Initia/e",
         "annotation_type": "general_note"
       },
@@ -71,7 +108,7 @@
         "annotation_type": "title_block_field"
       },
       {
-        "raw_text": "-medium\n0..1...0,3mm.\nacceptable.",
+        "raw_text": "-medium\n0..L...0,3mm.\nacceptable.",
         "annotation_type": "general_note"
       },
       {
@@ -79,18 +116,304 @@
         "annotation_type": "diameter_dimension"
       },
       {
-        "raw_text": "Gewicht Format",
-        "annotation_type": "title_block_field"
-      },
-      {
         "raw_text": "A3",
         "annotation_type": "title_block_field"
       }
     ],
-    "manufacturing": [],
-    "total_human_hours": 0.0
+    "manufacturing": [
+      {
+        "feature_description": "tile_0_2_f1",
+        "operation": "drilling",
+        "machine": "CNC machining centre",
+        "tooling": "Twist drill \u00d8?mm",
+        "precision_grade": "IT11",
+        "estimated_cycle_time_min": 0.0,
+        "estimated_setup_time_min": 5.0
+      },
+      {
+        "feature_description": "tile_0_2_f2",
+        "operation": "drilling",
+        "machine": "CNC machining centre",
+        "tooling": "Twist drill \u00d83.0mm",
+        "precision_grade": "IT11",
+        "estimated_cycle_time_min": 0.06,
+        "estimated_setup_time_min": 5.0
+      },
+      {
+        "feature_description": "tile_0_2_f3",
+        "operation": "drilling",
+        "machine": "CNC machining centre",
+        "tooling": "Twist drill \u00d8?mm",
+        "precision_grade": "IT11",
+        "estimated_cycle_time_min": 0.02,
+        "estimated_setup_time_min": 5.0
+      },
+      {
+        "feature_description": "tile_0_2_f4",
+        "operation": "drilling",
+        "machine": "CNC machining centre",
+        "tooling": "Twist drill \u00d8?mm",
+        "precision_grade": "IT11",
+        "estimated_cycle_time_min": 2.0,
+        "estimated_setup_time_min": 5.0
+      },
+      {
+        "feature_description": "tile_0_2_f5",
+        "operation": "chamfering",
+        "machine": "CNC machining centre",
+        "tooling": "Chamfer mill 45\u00b0",
+        "precision_grade": "IT12",
+        "estimated_cycle_time_min": 1.0,
+        "estimated_setup_time_min": 3.0
+      }
+    ],
+    "total_human_hours": 0.53
   },
-  "gpt4o": {},
+  "gpt4o": {
+    "features": [
+      {
+        "feature_type": "hole",
+        "description": "Central hole \u00d816",
+        "location": {
+          "cx": 0.15,
+          "cy": 0.5
+        }
+      },
+      {
+        "feature_type": "hole",
+        "description": "Four holes \u00d86",
+        "location": {
+          "cx": 0.85,
+          "cy": 0.2
+        }
+      },
+      {
+        "feature_type": "chamfer",
+        "description": "1x45\u00b0 chamfer",
+        "location": {
+          "cx": 0.2,
+          "cy": 0.6
+        }
+      },
+      {
+        "feature_type": "fillet",
+        "description": "R0.3 fillet",
+        "location": {
+          "cx": 0.4,
+          "cy": 0.5
+        }
+      },
+      {
+        "feature_type": "slot",
+        "description": "Slot with R3",
+        "location": {
+          "cx": 0.5,
+          "cy": 0.5
+        }
+      }
+    ],
+    "annotations": [
+      {
+        "raw_text": "\u00d816",
+        "annotation_type": "dimension",
+        "location": {
+          "cx": 0.15,
+          "cy": 0.5
+        }
+      },
+      {
+        "raw_text": "\u00d86",
+        "annotation_type": "dimension",
+        "location": {
+          "cx": 0.85,
+          "cy": 0.2
+        }
+      },
+      {
+        "raw_text": "1x45\u00b0",
+        "annotation_type": "dimension",
+        "location": {
+          "cx": 0.2,
+          "cy": 0.6
+        }
+      },
+      {
+        "raw_text": "R0.3",
+        "annotation_type": "dimension",
+        "location": {
+          "cx": 0.4,
+          "cy": 0.5
+        }
+      },
+      {
+        "raw_text": "General tolerance DIN ISO 2768 - medium",
+        "annotation_type": "tolerance",
+        "location": {
+          "cx": 0.8,
+          "cy": 0.9
+        }
+      },
+      {
+        "raw_text": "Deburr and break sharp edges 0.1-0.3mm",
+        "annotation_type": "note",
+        "location": {
+          "cx": 0.8,
+          "cy": 0.95
+        }
+      },
+      {
+        "raw_text": "Scratches and dents are not acceptable",
+        "annotation_type": "note",
+        "location": {
+          "cx": 0.8,
+          "cy": 0.98
+        }
+      }
+    ],
+    "manufacturing": [
+      {
+        "feature_description": "Central hole \u00d816",
+        "operation": "drilling",
+        "machine": "drill press",
+        "tooling": "16mm drill bit",
+        "precision_grade": "IT8",
+        "estimated_cycle_time_min": 5.0,
+        "estimated_setup_time_min": 10.0
+      },
+      {
+        "feature_description": "Four holes \u00d86",
+        "operation": "drilling",
+        "machine": "drill press",
+        "tooling": "6mm drill bit",
+        "precision_grade": "IT9",
+        "estimated_cycle_time_min": 8.0,
+        "estimated_setup_time_min": 15.0
+      },
+      {
+        "feature_description": "1x45\u00b0 chamfer",
+        "operation": "milling",
+        "machine": "CNC mill",
+        "tooling": "chamfer mill",
+        "precision_grade": "IT10",
+        "estimated_cycle_time_min": 3.0,
+        "estimated_setup_time_min": 5.0
+      },
+      {
+        "feature_description": "R0.3 fillet",
+        "operation": "milling",
+        "machine": "CNC mill",
+        "tooling": "corner rounding end mill",
+        "precision_grade": "IT10",
+        "estimated_cycle_time_min": 4.0,
+        "estimated_setup_time_min": 5.0
+      },
+      {
+        "feature_description": "Slot with R3",
+        "operation": "milling",
+        "machine": "CNC mill",
+        "tooling": "slot mill",
+        "precision_grade": "IT9",
+        "estimated_cycle_time_min": 6.0,
+        "estimated_setup_time_min": 10.0
+      }
+    ],
+    "total_man_hours": 1.8,
+    "confidence": 0.95
+  },
   "gemini": {},
-  "evaluation": {}
+  "evaluation": {
+    "scores": {
+      "system_a": {
+        "feature_completeness": 6,
+        "annotation_accuracy": 5,
+        "feature_annotation_linking": 4,
+        "manufacturing_correctness": 3,
+        "time_estimate_accuracy": 0,
+        "overall": 4
+      },
+      "system_b": {
+        "feature_completeness": 9,
+        "annotation_accuracy": 9,
+        "feature_annotation_linking": 8,
+        "manufacturing_correctness": 8,
+        "time_estimate_accuracy": 8,
+        "overall": 8
+      },
+      "system_c": {
+        "feature_completeness": 0,
+        "annotation_accuracy": 0,
+        "feature_annotation_linking": 0,
+        "manufacturing_correctness": 0,
+        "time_estimate_accuracy": 0,
+        "overall": 0
+      }
+    },
+    "agreement": [
+      {
+        "topic": "General tolerance",
+        "value": "DIN ISO 2768 - medium",
+        "confidence": "high"
+      }
+    ],
+    "errors_in_system_a": [
+      {
+        "category": "feature",
+        "description": "Missed several features like the slot and fillet.",
+        "system_b_says": "Slot with R3, R0.3 fillet",
+        "system_c_says": "",
+        "severity": "high"
+      },
+      {
+        "category": "annotation",
+        "description": "Incorrectly read some dimensions and notes.",
+        "system_b_says": "Correct dimensions and notes",
+        "system_c_says": "",
+        "severity": "medium"
+      },
+      {
+        "category": "linking",
+        "description": "Failed to correctly link dimensions to features.",
+        "system_b_says": "Correct linking",
+        "system_c_says": "",
+        "severity": "high"
+      },
+      {
+        "category": "manufacturing",
+        "description": "Incorrect process classifications.",
+        "system_b_says": "Correct classifications",
+        "system_c_says": "",
+        "severity": "high"
+      },
+      {
+        "category": "time",
+        "description": "No time estimates provided.",
+        "system_b_says": "Reasonable time estimates",
+        "system_c_says": "",
+        "severity": "high"
+      }
+    ],
+    "improvements": [
+      {
+        "priority": "high",
+        "suggestion": "Improve feature detection to include all visible features like slots and fillets."
+      },
+      {
+        "priority": "medium",
+        "suggestion": "Enhance OCR capabilities for better annotation accuracy."
+      },
+      {
+        "priority": "high",
+        "suggestion": "Develop better linking algorithms to connect dimensions with the correct features."
+      },
+      {
+        "priority": "high",
+        "suggestion": "Incorporate manufacturing process knowledge to improve process classification."
+      },
+      {
+        "priority": "high",
+        "suggestion": "Add functionality to estimate manufacturing times."
+      }
+    ],
+    "summary": "System A shows significant room for improvement, particularly in feature detection and annotation accuracy. It struggles with linking dimensions to features and lacks manufacturing process insights. Enhancements in these areas are crucial for achieving better performance."
+  }
 }

@@ -55,14 +55,14 @@ Return ONLY this JSON:
 
 def analyze_with_gemini(image_b64: str) -> dict:
     """
-    Send one drawing image to Gemini 1.5 Pro and return structured analysis.
+    Send one drawing image to Gemini 3.5 Flash and return structured analysis.
     """
     try:
         # Convert base64 to PIL image for Gemini
         img_data = base64.b64decode(image_b64)
         pil_img  = Image.open(BytesIO(img_data)).convert("RGB")
 
-        model    = genai.GenerativeModel("gemini-1.5-pro")
+        model    = genai.GenerativeModel("gemini-3.5-flash")
         response = model.generate_content(
             [FEATURE_PROMPT, pil_img],
             generation_config=genai.types.GenerationConfig(
